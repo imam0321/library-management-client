@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { IBook } from "@/utils/book.interface";
-import { BookOpen, Pencil, Trash2 } from "lucide-react";
+import { Edit, Eye, ShoppingBag, Trash2 } from "lucide-react";
 
 interface BookCardProps {
   book: IBook;
@@ -18,52 +18,61 @@ interface BookCardProps {
 
 const BookCard = ({ book, onEdit, onDelete, onBorrow }: BookCardProps) => {
   return (
-    <Card className="w-full sm:w-[300px] shadow-md hover:shadow-lg transition">
+    <Card className="w-full sm:w-[350px] rounded-xl shadow-md hover:shadow-xl">
       <CardHeader>
-        <CardTitle className="text-lg">{book.title}</CardTitle>
-        <p className="text-sm text-muted-foreground line-clamp-2">
+        <div className="flex justify-between items-start">
+          <CardTitle className="text-lg font-semibold">{book.title}</CardTitle>
+          <div className="flex items-center gap-2">
+            <Edit
+              className="w-5 h-5 text-blue-600 hover:scale-110 transition-transform cursor-pointer"
+              onClick={() => onEdit(book)}
+            />
+            <Trash2
+              className="w-5 h-5 text-red-500 hover:scale-110 transition-transform cursor-pointer"
+              onClick={() => onDelete(book._id)}
+            />
+          </div>
+        </div>
+        <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
           {book.description}
         </p>
       </CardHeader>
 
-      <CardContent>
-        <p className="text-sm">
-          <strong>Author:</strong> {book.author}
-        </p>
-        <p className="text-sm">
-          <strong>Genre:</strong> {book.genre}
-        </p>
-        <p className="text-sm">
-          <strong>ISBN:</strong> {book.isbn}
-        </p>
-        <p className="text-sm">
-          <strong>Copies:</strong> {book.copies}{" "}
-          <span className={book.copies > 0 ? "text-green-600" : "text-red-500"}>
-            ({book.copies > 0 ? "Available" : "Unavailable"})
+      <CardContent className="text-sm">
+        <div className="flex justify-between items-center">
+          <span className="text-muted-foreground font-bold">
+            Copies: {book.copies}
           </span>
-        </p>
+          <p
+            className={`ml-2 px-2 py-0.5 rounded-full text-xs font-semibold items-end ${
+              book.copies > 0
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-600"
+            }`}
+          >
+            {book.copies > 0 ? "Available" : "Unavailable"}
+          </p>
+        </div>
       </CardContent>
 
-      <CardFooter className="flex justify-between gap-2 mt-2">
-        <Button variant="outline" size="sm" onClick={() => onEdit(book)}>
-          <Pencil className="w-4 h-4 mr-1" />
-          Edit
-        </Button>
+      <CardFooter className="flex flex-col sm:flex-row sm:justify-between gap-2 mt-1">
         <Button
-          variant="destructive"
+          variant="outline"
           size="sm"
-          onClick={() => onDelete(book._id)}
+          className="w-full sm:w-auto flex items-center justify-center gap-1"
+          onClick={() => onBorrow(book)}
         >
-          <Trash2 className="w-4 h-4 mr-1" />
-          Delete
+          <Eye className="w-4 h-4" />
+          Details
         </Button>
         <Button
           variant="default"
           size="sm"
+          className="w-full sm:w-auto flex items-center justify-center gap-1"
           onClick={() => onBorrow(book)}
           disabled={book.copies === 0}
         >
-          <BookOpen className="w-4 h-4 mr-1" />
+          <ShoppingBag className="w-4 h-4" />
           Borrow
         </Button>
       </CardFooter>

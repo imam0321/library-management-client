@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
+import { ModeToggle } from "../ModeToggle/ModeToggle";
 import { Link } from "react-router";
 
 const navItems = [
@@ -8,27 +11,67 @@ const navItems = [
 ];
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <nav className="container mx-auto flex items-center justify-between p-4">
-        <Link to="/" className="text-xl font-bold text-blue-600">
+    <header className="w-full bg-white dark:bg-neutral-900 shadow-md sticky top-0 z-50">
+      <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+        <Link
+          to="/"
+          className="text-xl font-bold text-blue-600 dark:text-white"
+        >
           📚 BookShelf
         </Link>
-        <ul className="flex gap-6">
+
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden flex items-center gap-2">
+          <ModeToggle />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-gray-700 dark:text-white focus:outline-none"
+            aria-label="Toggle Menu"
+          >
+            {menuOpen ? (
+              <X className="w-7 h-7" />
+            ) : (
+              <Menu className="w-7 h-7" />
+            )}
+          </button>
+        </div>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <li key={item.to}>
               <Link
                 to={item.to}
                 className={cn(
-                  "text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                  "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white font-medium transition-colors"
                 )}
               >
                 {item.name}
               </Link>
             </li>
           ))}
+          <ModeToggle />
         </ul>
       </nav>
+
+      {/* Mobile Menu Dropdown */}
+      {menuOpen && (
+        <div className="md:hidden px-4 pb-4 space-y-2">
+          {navItems.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              onClick={() => setMenuOpen(false)}
+              className="block text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white font-medium transition-colors"
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
+      )}
     </header>
   );
 };
