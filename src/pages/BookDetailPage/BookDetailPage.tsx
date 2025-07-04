@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useGetBookByIdQuery } from "@/redux/features/book/bookApi";
 import type { IBook } from "@/utils/book.interface";
 import { useParams, useNavigate } from "react-router";
-import { Pencil, ShoppingBag, Trash2 } from "lucide-react";
+import { ShoppingBag, Trash2 } from "lucide-react";
+import EditButton from "@/components/EditButton/EditButton";
 
 const BookDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,12 +12,6 @@ const BookDetailPage = () => {
   const { data, isLoading } = useGetBookByIdQuery(id!);
 
   const book: IBook | undefined = data?.data;
-
-  const handleEdit = () => {
-    if (book?._id) {
-      navigate(`/books/edit/${book._id}`);
-    }
-  };
 
   const handleDelete = () => {
     if (confirm("Are you sure you want to delete this book?")) {
@@ -92,14 +87,7 @@ const BookDetailPage = () => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8">
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button
-              variant="outline"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition hover:bg-gray-100 dark:hover:bg-neutral-800"
-              onClick={handleEdit}
-            >
-              <Pencil className="w-5 h-5" />
-              Edit
-            </Button>
+            <EditButton id={book._id} details={true} />
             <Button
               className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-white text-base font-semibold transition bg-rose-500  hover:bg-rose-600 hover:text-white"
               onClick={handleDelete}

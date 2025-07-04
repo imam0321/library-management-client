@@ -1,3 +1,4 @@
+import EditButton from "@/components/EditButton/EditButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { IBook } from "@/utils/book.interface";
-import { Edit, Eye, ShoppingBag, Trash2 } from "lucide-react";
+import { Eye, ShoppingBag, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 
 interface BookCardProps {
@@ -18,17 +19,14 @@ interface BookCardProps {
   onBorrow: (book: IBook) => void;
 }
 
-const BookCard = ({ book, onEdit, onDelete, onBorrow }: BookCardProps) => {
+const BookCard = ({ book, onDelete, onBorrow }: BookCardProps) => {
   return (
     <Card className="w-full sm:w-[350px] rounded-xl shadow-md hover:shadow-xl">
       <CardHeader>
         <div className="flex justify-between items-start">
           <CardTitle className="text-lg font-semibold">{book.title}</CardTitle>
           <div className="flex items-center gap-2">
-            <Edit
-              className="w-5 h-5 text-blue-600 hover:scale-110 transition-transform cursor-pointer"
-              onClick={() => onEdit(book)}
-            />
+            <EditButton id={book._id} details={false} />
             <Trash2
               className="w-5 h-5 text-red-500 hover:scale-110 transition-transform cursor-pointer"
               onClick={() => onDelete(book._id)}

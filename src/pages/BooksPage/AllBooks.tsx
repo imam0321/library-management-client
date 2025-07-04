@@ -15,15 +15,15 @@ const AllBooks = () => {
   const currentPage = data?.meta?.page || page;
 
   const handleEdit = (book: IBook) => {
-    // console.log("Edit:", book);
+    console.log("Edit:", book);
   };
 
   const handleDelete = (id: string) => {
-    // console.log("Delete:", id);
+    console.log("Delete:", id);
   };
 
   const handleBorrow = (book: IBook) => {
-    // console.log("Borrow:", book);
+    console.log("Borrow:", book);
   };
 
   if (isLoading)
