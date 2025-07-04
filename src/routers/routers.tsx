@@ -1,5 +1,6 @@
 import Main from "@/layout/Main";
-import AllBooks from "@/pages/BooksPage/AllBooks/AllBooks";
+import BookDetailPage from "@/pages/BookDetailPage/BookDetailPage";
+import AllBooks from "@/pages/BooksPage/AllBooks";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter([
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
       {
         path: "/books",
         element: <AllBooks />,
+      },
+      {
+        path: "/books/:id",
+        element: <BookDetailPage />,
       },
     ],
   },

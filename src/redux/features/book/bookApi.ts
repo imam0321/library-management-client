@@ -6,7 +6,10 @@ export const bookApi = baseApi.injectEndpoints({
     getBooks: builder.query<IBookResponse, { limit?: number; page?: number }>({
       query: ({ limit = 6, page = 1 }) => `books?limit=${limit}&page=${page}`,
     }),
+    getBookById: builder.query({
+      query: (id)=> `books/${id}`
+    })
   }),
 });
 
-export const { useGetBooksQuery } = bookApi;
+export const { useGetBooksQuery, useGetBookByIdQuery } = bookApi;

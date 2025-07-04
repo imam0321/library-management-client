@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import type { IBook } from "@/utils/book.interface";
 import { Edit, Eye, ShoppingBag, Trash2 } from "lucide-react";
+import { Link } from "react-router";
 
 interface BookCardProps {
   book: IBook;
@@ -43,32 +45,32 @@ const BookCard = ({ book, onEdit, onDelete, onBorrow }: BookCardProps) => {
           <span className="text-muted-foreground font-bold">
             Copies: {book.copies}
           </span>
-          <p
-            className={`ml-2 px-2 py-0.5 rounded-full text-xs font-semibold items-end ${
-              book.copies > 0
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-600"
+          <Badge
+            variant="outline"
+            className={`text-xs px-3 py-1 rounded-full border ${
+              book.available
+                ? "border-green-500 text-green-600 dark:text-green-400"
+                : "border-red-500 text-red-600 dark:text-red-400"
             }`}
           >
-            {book.copies > 0 ? "Available" : "Unavailable"}
-          </p>
+            {book.available ? "Available" : "Not Available"}
+          </Badge>
         </div>
       </CardContent>
 
       <CardFooter className="flex flex-col sm:flex-row sm:justify-between gap-2 mt-1">
-        <Button
-          variant="outline"
-          size="sm"
-          className="w-full sm:w-auto flex items-center justify-center gap-1"
+        <Link
+          to={`/books/${book._id}`}
+          className="inline-flex items-center justify-center gap-1 px-4 py-1.5 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-100 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 w-full sm:w-auto transition-colors"
           onClick={() => onBorrow(book)}
         >
           <Eye className="w-4 h-4" />
           Details
-        </Button>
+        </Link>
         <Button
           variant="default"
           size="sm"
-          className="w-full sm:w-auto flex items-center justify-center gap-1"
+          className="w-full sm:w-auto flex items-center justify-center gap-1 py-1.5"
           onClick={() => onBorrow(book)}
           disabled={book.copies === 0}
         >
