@@ -6,7 +6,7 @@ import { Link } from "react-router";
 
 const navItems = [
   { name: "All Books", to: "/books", icon: BookOpen },
-  { name: "Add Book", to: "/books/add", icon: PlusCircle },
+  { name: "Add Book", to: "/create-book", icon: PlusCircle },
   { name: "Borrow Summary", to: "/borrow-summary", icon: ClipboardList },
 ];
 

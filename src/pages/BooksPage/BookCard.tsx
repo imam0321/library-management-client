@@ -55,7 +55,7 @@ const BookCard = ({ book, onBorrow }: BookCardProps) => {
       <CardFooter className="flex flex-col sm:flex-row sm:justify-between gap-2 mt-1">
         <Link
           to={`/books/${book._id}`}
-          className="inline-flex items-center justify-center gap-1 px-4 py-1.5 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-100 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 w-full sm:w-auto transition-colors"
+          className="inline-flex items-center justify-center gap-1 px-4 py-1.5 border border-gray-300 dark:border-none rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-100 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 w-full sm:w-auto transition-colors"
           onClick={() => onBorrow(book)}
         >
           <Eye className="w-4 h-4" />

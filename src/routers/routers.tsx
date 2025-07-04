@@ -1,4 +1,5 @@
 import Main from "@/layout/Main";
+import AddBookPage from "@/pages/AddBookPage/AddBookPage";
 import BookDetailPage from "@/pages/BookDetailPage/BookDetailPage";
 import AllBooks from "@/pages/BooksPage/AllBooks";
 import { createBrowserRouter } from "react-router";
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: "/books/:id",
         element: <BookDetailPage />,
+      },
+      {
+        path: "/create-book",
+        element: <AddBookPage />,
       },
     ],
   },
