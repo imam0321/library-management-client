@@ -10,13 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { IBook } from "@/utils/book.interface";
-import { Eye, ShoppingBag, Trash2 } from "lucide-react";
+import { Eye, ShoppingBag } from "lucide-react";
 import { Link } from "react-router";
 
 interface BookCardProps {
   book: IBook;
-  onEdit: (book: IBook) => void;
-  onDelete: (id: string) => void;
   onBorrow: (book: IBook) => void;
 }
 

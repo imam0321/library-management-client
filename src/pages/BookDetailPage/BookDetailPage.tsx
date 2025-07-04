@@ -11,7 +11,7 @@ const BookDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useGetBookByIdQuery(id!);
 
-  const book: IBook | undefined = data?.data;
+  const book: IBook = data?.data;
 
   // TODO
   const handleBorrow = () => {

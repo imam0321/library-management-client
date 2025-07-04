@@ -14,14 +14,6 @@ const AllBooks = () => {
   const totalPages = data?.meta?.totalPages || 1;
   const currentPage = data?.meta?.page || page;
 
-  const handleEdit = (book: IBook) => {
-    console.log("Edit:", book);
-  };
-
-  const handleDelete = (id: string) => {
-    console.log("Delete:", id);
-  };
-
   const handleBorrow = (book: IBook) => {
     console.log("Borrow:", book);
   };
@@ -41,8 +33,6 @@ const AllBooks = () => {
           <BookCard
             key={book._id}
             book={book}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
             onBorrow={handleBorrow}
           />
         ))}
