@@ -3,7 +3,7 @@ import { Github, Facebook, Twitter } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 dark:bg-neutral-900 text-gray-700 dark:text-gray-300 mt-10 border-t border-gray-200 dark:border-neutral-700">
+    <footer className="bg-gray-100 dark:bg-neutral-900 text-gray-700 dark:text-gray-300 border-t border-gray-200 dark:border-neutral-700">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <Link

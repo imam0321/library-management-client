@@ -34,7 +34,7 @@ const AllBooks = () => {
     );
 
   return (
-    <div className="max-w-6xl max-h-screen mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-center mb-4">All Books</h2>
       <div className="grid gap-4 grid-cols-1 lg:grid-cols-3">
         {books.map((book) => (

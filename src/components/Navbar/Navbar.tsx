@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { BookOpen, ClipboardList, Menu, PlusCircle, X } from "lucide-react";
 import { ModeToggle } from "../ModeToggle/ModeToggle";
 import { Link } from "react-router";
 
 const navItems = [
-  { name: "All Books", to: "/books" },
-  { name: "Add Book", to: "/books/add" },
-  { name: "Borrow Summary", to: "/borrow-summary" },
+  { name: "All Books", to: "/books", icon: BookOpen },
+  { name: "Add Book", to: "/books/add", icon: PlusCircle },
+  { name: "Borrow Summary", to: "/borrow-summary", icon: ClipboardList },
 ];
 
 const Navbar = () => {
@@ -41,15 +41,16 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center gap-6">
-          {navItems.map((item) => (
-            <li key={item.to}>
+          {navItems.map(({ name, to, icon: Icon }) => (
+            <li key={to}>
               <Link
-                to={item.to}
+                to={to}
                 className={cn(
-                  "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white font-medium transition-colors"
+                  "flex items-center gap-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white font-medium transition-colors"
                 )}
               >
-                {item.name}
+                <Icon className="w-5 h-5" />
+                {name}
               </Link>
             </li>
           ))}
@@ -60,14 +61,15 @@ const Navbar = () => {
       {/* Mobile Menu Dropdown */}
       {menuOpen && (
         <div className="md:hidden px-4 pb-4 space-y-2">
-          {navItems.map((item) => (
+          {navItems.map(({ name, to, icon: Icon }) => (
             <Link
-              key={item.to}
-              to={item.to}
+              key={to}
+              to={to}
               onClick={() => setMenuOpen(false)}
-              className="block text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white font-medium transition-colors"
+              className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white font-medium transition-colors"
             >
-              {item.name}
+              <Icon className="w-5 h-5" />
+              {name}
             </Link>
           ))}
         </div>
