@@ -1,3 +1,4 @@
+import DeleteButton from "@/components/DeleteButton/DeleteButton";
 import EditButton from "@/components/EditButton/EditButton";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,7 +20,7 @@ interface BookCardProps {
   onBorrow: (book: IBook) => void;
 }
 
-const BookCard = ({ book, onDelete, onBorrow }: BookCardProps) => {
+const BookCard = ({ book, onBorrow }: BookCardProps) => {
   return (
     <Card className="w-full sm:w-[350px] rounded-xl shadow-md hover:shadow-xl">
       <CardHeader>
@@ -27,10 +28,7 @@ const BookCard = ({ book, onDelete, onBorrow }: BookCardProps) => {
           <CardTitle className="text-lg font-semibold">{book.title}</CardTitle>
           <div className="flex items-center gap-2">
             <EditButton id={book._id} details={false} />
-            <Trash2
-              className="w-5 h-5 text-red-500 hover:scale-110 transition-transform cursor-pointer"
-              onClick={() => onDelete(book._id)}
-            />
+            <DeleteButton id={book._id} details={false} />
           </div>
         </div>
         <p className="text-sm text-muted-foreground mt-1 line-clamp-2">

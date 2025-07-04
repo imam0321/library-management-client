@@ -2,30 +2,24 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useGetBookByIdQuery } from "@/redux/features/book/bookApi";
 import type { IBook } from "@/utils/book.interface";
-import { useParams, useNavigate } from "react-router";
-import { ShoppingBag, Trash2 } from "lucide-react";
+import { useParams, Navigate } from "react-router";
+import { ShoppingBag } from "lucide-react";
 import EditButton from "@/components/EditButton/EditButton";
+import DeleteButton from "@/components/DeleteButton/DeleteButton";
 
 const BookDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const { data, isLoading } = useGetBookByIdQuery(id!);
 
   const book: IBook | undefined = data?.data;
 
-  const handleDelete = () => {
-    if (confirm("Are you sure you want to delete this book?")) {
-      console.log("Deleting book with ID:", book?._id);
-      // Call your delete mutation here
-      navigate("/books");
-    }
-  };
-
+  // TODO
   const handleBorrow = () => {
     console.log("Borrowing book:", book);
     // Trigger borrow mutation/modal
   };
 
+  // TODO
   if (isLoading) {
     return (
       <p className="h-screen flex items-center justify-center text-lg font-medium">
@@ -35,7 +29,7 @@ const BookDetailPage = () => {
   }
 
   if (!book) {
-    return <p className="text-center text-red-500 mt-10">Book not found.</p>;
+    return <Navigate to="/" />;
   }
 
   return (
@@ -87,14 +81,9 @@ const BookDetailPage = () => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8">
           <div className="flex flex-col sm:flex-row gap-4">
+            {/* TODO */}
             <EditButton id={book._id} details={true} />
-            <Button
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-white text-base font-semibold transition bg-rose-500  hover:bg-rose-600 hover:text-white"
-              onClick={handleDelete}
-            >
-              <Trash2 className="w-5 h-5" />
-              Delete
-            </Button>
+            <DeleteButton id={book._id} details={true} />
           </div>
 
           <Button

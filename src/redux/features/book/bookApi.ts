@@ -5,11 +5,21 @@ export const bookApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query<IBookResponse, { limit?: number; page?: number }>({
       query: ({ limit = 6, page = 1 }) => `books?limit=${limit}&page=${page}`,
+      providesTags: ["Books"],
     }),
     getBookById: builder.query({
-      query: (id)=> `books/${id}`
-    })
+      query: (id) => `books/${id}`,
+      providesTags: ["Books"],
+    }),
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `books/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Books"],
+    }),
   }),
 });
 
-export const { useGetBooksQuery, useGetBookByIdQuery } = bookApi;
+export const { useGetBooksQuery, useGetBookByIdQuery, useDeleteBookMutation } =
+  bookApi;
