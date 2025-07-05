@@ -25,6 +25,10 @@ export const router = createBrowserRouter([
         path: "/create-book",
         element: <AddBookPage />,
       },
+      {
+        path: "/edit-book/:id",
+        element: <AddBookPage />,
+      },
     ],
   },
 ]);

@@ -23,9 +23,10 @@ interface PropsType {
   form: UseFormReturn<IBook>;
   onSubmit: SubmitHandler<IBook>;
   isLoading: boolean;
+  buttonLabel?: string;
 }
 
-const BookForm = ({ form, onSubmit, isLoading }: PropsType) => {
+const BookForm = ({ form, onSubmit, isLoading, buttonLabel }: PropsType) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -120,15 +121,6 @@ const BookForm = ({ form, onSubmit, isLoading }: PropsType) => {
           control={form.control}
           rules={{
             required: "ISBN is required",
-            validate: (value: string) => {
-              const existingISBNs = ["1234567890", "9876543210", "1111111111"]; // replace with your real ISBNs
-
-              if (existingISBNs.includes(value)) {
-                return "ISBN must be unique";
-              }
-
-              return true;
-            },
           }}
           name="isbn"
           render={({ field }) => (
@@ -161,7 +153,7 @@ const BookForm = ({ form, onSubmit, isLoading }: PropsType) => {
               Submitting...
             </>
           ) : (
-            "Submit"
+            buttonLabel || "Add Book"
           )}
         </Button>
       </form>
