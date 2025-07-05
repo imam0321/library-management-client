@@ -16,4 +16,4 @@ export const borrowApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useBorrowBookMutation, useGetBorrowSummaryQuery } = borrowApi;
+export const { useBorrowBookMutation, useGetBorrowSummaryQuery} = borrowApi;
