@@ -3,7 +3,6 @@ import type { IBookResponse } from "@/utils/book.interface";
 
 export const bookApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-
     getBooks: builder.query<IBookResponse, { limit?: number; page?: number }>({
       query: ({ limit = 6, page = 1 }) => `books?limit=${limit}&page=${page}`,
       providesTags: ["Books"],
@@ -14,6 +13,15 @@ export const bookApi = baseApi.injectEndpoints({
       providesTags: ["Books"],
     }),
 
+    addBook: builder.mutation({
+      query: (bookData) => ({
+        url: "books",
+        method: "POST",
+        body: bookData,
+      }),
+      invalidatesTags: ["Books"]
+    }),
+
     deleteBook: builder.mutation({
       query: (id) => ({
         url: `books/${id}`,
@@ -21,10 +29,12 @@ export const bookApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Books"],
     }),
-
-        
   }),
 });
 
-export const { useGetBooksQuery, useGetBookByIdQuery, useDeleteBookMutation } =
-  bookApi;
+export const {
+  useGetBooksQuery,
+  useGetBookByIdQuery,
+  useAddBookMutation,
+  useDeleteBookMutation,
+} = bookApi;
