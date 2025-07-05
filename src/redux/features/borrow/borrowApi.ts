@@ -8,11 +8,12 @@ export const borrowApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["Books", "Borrow"],
     }),
+
     getBorrowSummary: builder.query({
       query: () => "borrow",
-      providesTags: ["Books", "Borrow"],
     }),
   }),
 });
+
+export const { useBorrowBookMutation, useGetBorrowSummaryQuery } = borrowApi;
