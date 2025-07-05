@@ -38,7 +38,7 @@ const DeleteButton = ({ details, id }: DeleteButtonProps) => {
       />
       {details === true ? (
         <Button
-          className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-white text-base font-semibold transition bg-rose-500 hover:bg-rose-600 hover:text-white"
+          className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg px-6 py-2 text-white text-base font-semibold transition bg-rose-500 hover:bg-rose-600 hover:text-white"
           onClick={() => setIsDialogOpen(true)}
         >
           <Trash2 className="w-5 h-5" />
