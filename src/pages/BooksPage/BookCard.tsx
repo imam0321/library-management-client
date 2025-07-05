@@ -1,3 +1,4 @@
+import BorrowButton from "@/components/BorrowButton/BorrowButton";
 import DeleteButton from "@/components/DeleteButton/DeleteButton";
 import EditButton from "@/components/EditButton/EditButton";
 import { Badge } from "@/components/ui/badge";
@@ -10,23 +11,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { IBook } from "@/utils/book.interface";
-import { Eye, ShoppingBag } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Link } from "react-router";
 
 interface BookCardProps {
   book: IBook;
-  onBorrow: (book: IBook) => void;
 }
 
-const BookCard = ({ book, onBorrow }: BookCardProps) => {
+const BookCard = ({ book }: BookCardProps) => {
   return (
     <Card className="w-full sm:w-[350px] rounded-xl shadow-md hover:shadow-xl">
       <CardHeader>
         <div className="flex justify-between items-start">
           <CardTitle className="text-lg font-semibold">{book.title}</CardTitle>
           <div className="flex items-center gap-2">
-            <EditButton id={book._id} details={false} />
-            <DeleteButton id={book._id} details={false} />
+            <EditButton id={book._id!} details={false} />
+            <DeleteButton id={book._id!} details={false} />
           </div>
         </div>
         <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
@@ -56,21 +56,11 @@ const BookCard = ({ book, onBorrow }: BookCardProps) => {
         <Link
           to={`/books/${book._id}`}
           className="inline-flex items-center justify-center gap-1 px-4 py-1.5 border border-gray-300 dark:border-none rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-100 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 w-full sm:w-auto transition-colors"
-          onClick={() => onBorrow(book)}
         >
           <Eye className="w-4 h-4" />
           Details
         </Link>
-        <Button
-          variant="default"
-          size="sm"
-          className="w-full sm:w-auto flex items-center justify-center gap-1 py-1.5"
-          onClick={() => onBorrow(book)}
-          disabled={book.copies === 0}
-        >
-          <ShoppingBag className="w-4 h-4" />
-          Borrow
-        </Button>
+        <BorrowButton id={book._id!} />
       </CardFooter>
     </Card>
   );

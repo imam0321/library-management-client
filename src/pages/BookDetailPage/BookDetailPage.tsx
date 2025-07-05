@@ -1,23 +1,16 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { useGetBookByIdQuery } from "@/redux/features/book/bookApi";
 import type { IBook } from "@/utils/book.interface";
 import { useParams, Navigate } from "react-router";
-import { ShoppingBag } from "lucide-react";
 import EditButton from "@/components/EditButton/EditButton";
 import DeleteButton from "@/components/DeleteButton/DeleteButton";
+import BorrowButton from "@/components/BorrowButton/BorrowButton";
 
 const BookDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const { data, isLoading } = useGetBookByIdQuery(id!);
 
   const book: IBook = data?.data;
-
-  // TODO
-  const handleBorrow = () => {
-    console.log("Borrowing book:", book);
-    // Trigger borrow mutation/modal
-  };
 
   // TODO
   if (isLoading) {
@@ -81,20 +74,11 @@ const BookDetailPage = () => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8">
           <div className="flex flex-col sm:flex-row gap-4">
-            {/* TODO */}
-            <EditButton id={book._id} details={true} />
-            <DeleteButton id={book._id} details={true} />
+            <EditButton id={book._id!} details={true} />
+            <DeleteButton id={book._id!} details={true} />
           </div>
 
-          <Button
-            variant="default"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-base font-semibold transition hover:scale-105"
-            onClick={handleBorrow}
-            disabled={!book.available}
-          >
-            <ShoppingBag className="w-5 h-5" />
-            Borrow
-          </Button>
+          <BorrowButton id={book._id!}/>
         </div>
       </div>
     </div>
