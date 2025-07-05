@@ -14,10 +14,6 @@ const AllBooks = () => {
   const totalPages = data?.meta?.totalPages || 1;
   const currentPage = data?.meta?.page || page;
 
-  const handleBorrow = (book: IBook) => {
-    console.log("Borrow:", book);
-  };
-
   if (isLoading)
     return <p className="h-screen text-center mt-10">Loading...</p>;
   if (isError)
@@ -33,7 +29,6 @@ const AllBooks = () => {
           <BookCard
             key={book._id}
             book={book}
-            onBorrow={handleBorrow}
           />
         ))}
       </div>
