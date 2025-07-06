@@ -54,7 +54,8 @@ const BookCard = ({ book }: BookCardProps) => {
       <CardFooter className="flex flex-col sm:flex-row sm:justify-between gap-2 mt-1">
         <Link
           to={`/books/${book._id}`}
-          className="inline-flex justify-center items-center gap-1 px-4 py-1.5 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-100 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 transition-colors w-full sm:w-auto"
+          className="inline-flex justify-center items-center gap-1 px-4 py-1.5 rounded-md text-sm font-medium 
+          bg-neutral-800 hover:bg-gray-700 text-white dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700 transition-colors w-full sm:w-auto"
         >
           <Eye className="w-4 h-4" />
           Details

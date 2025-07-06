@@ -69,7 +69,7 @@ const BookDetailPage = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8">
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full">
             <EditButton id={book._id!} details={true} />
             <DeleteButton id={book._id!} details={true} />
           </div>
