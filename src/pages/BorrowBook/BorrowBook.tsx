@@ -27,7 +27,7 @@ const BorrowBook = () => {
       return;
     }
 
-    if (data.quantity >= copies) {
+    if (data.quantity > copies) {
       toast.error(`Only ${copies} copies are available to borrow.`);
       return;
     }
@@ -50,7 +50,7 @@ const BorrowBook = () => {
 
   return (
     <div className="max-w-sm mx-auto px-4 py-10">
-      <Card>
+      <Card className="border-2 border-gray-300 dark:border-gray-900">
         <CardHeader>
           <CardTitle>Borrow Book</CardTitle>
         </CardHeader>

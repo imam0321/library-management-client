@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader/Loader";
 import {
   Table,
   TableBody,
@@ -23,12 +24,7 @@ const BorrowSummary = () => {
     error,
   } = useGetBorrowSummaryQuery(undefined);
 
-  if (isLoading)
-    return (
-      <div className="p-4 text-center text-gray-700 dark:text-gray-300">
-        Loading...
-      </div>
-    );
+  if (isLoading) return <Loader />;
   if (error)
     return (
       <div className="p-4 text-center text-red-600 dark:text-red-400">
@@ -39,7 +35,7 @@ const BorrowSummary = () => {
   const borrowSummary: BorrowSummaryItem[] = response?.data || [];
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-md dark:bg-neutral-800 my-10">
+    <div className="max-w-4xl mx-auto bg-white dark:bg-neutral-900 border-2 border-gray-300 dark:border-gray-900 rounded-xl shadow-md p-6 my-10">
       <h2 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
         Borrowed Books Summary
       </h2>

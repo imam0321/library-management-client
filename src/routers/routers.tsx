@@ -1,10 +1,12 @@
-import Main from "@/layout/Main";
-import AddBookPage from "@/pages/AddBookPage/AddBookPage";
-import BookDetailPage from "@/pages/BookDetailPage/BookDetailPage";
-import AllBooks from "@/pages/BooksPage/AllBooks";
-import BorrowBook from "@/pages/BorrowBook/BorrowBook";
-import BorrowSummary from "@/pages/BorrowSummary/BorrowSummary";
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
+const Main = lazy(() => import("@/layout/Main"));
+const AddBookPage = lazy(() => import("@/pages/AddBookPage/AddBookPage"));
+const BookDetailPage = lazy(() => import("@/pages/BookDetailPage/BookDetailPage"));
+const AllBooks = lazy(() => import("@/pages/BooksPage/AllBooks"));
+const BorrowBook = lazy(() => import("@/pages/BorrowBook/BorrowBook"));
+const BorrowSummary = lazy(() => import("@/pages/BorrowSummary/BorrowSummary"));
+
 
 export const router = createBrowserRouter([
   {

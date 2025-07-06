@@ -39,7 +39,11 @@ const BookForm = ({ form, onSubmit, isLoading, buttonLabel }: PropsType) => {
               <FormItem className="md:w-1/2 w-full">
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input {...field} value={field.value || ""} />
+                  <Input
+                    {...field}
+                    value={field.value || ""}
+                    placeholder="Book name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -53,7 +57,11 @@ const BookForm = ({ form, onSubmit, isLoading, buttonLabel }: PropsType) => {
               <FormItem className="md:w-1/2 w-full">
                 <FormLabel>Author</FormLabel>
                 <FormControl>
-                  <Input {...field} value={field.value || ""} />
+                  <Input
+                    {...field}
+                    value={field.value || ""}
+                    placeholder="Author name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -71,7 +79,7 @@ const BookForm = ({ form, onSubmit, isLoading, buttonLabel }: PropsType) => {
                 <FormLabel>Genre</FormLabel>
                 <Select
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  value={field.value || ""}
                 >
                   <FormControl>
                     <SelectTrigger className="w-full">
@@ -96,8 +104,8 @@ const BookForm = ({ form, onSubmit, isLoading, buttonLabel }: PropsType) => {
             rules={{
               required: "Copies are required",
               min: {
-                value: 1,
-                message: "Must be at least 1 copy",
+                value: 0,
+                message: "Must be a positive number",
               },
             }}
             name="copies"
@@ -108,8 +116,12 @@ const BookForm = ({ form, onSubmit, isLoading, buttonLabel }: PropsType) => {
                   <Input
                     {...field}
                     type="number"
-                    value={field.value || ""}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
+                    value={field.value ?? 0}
+                    placeholder="0"
+                    onChange={(e) => {
+                      const value = Number(e.target.value);
+                      field.onChange(value >= 0 ? value : 0);
+                    }}
                   />
                 </FormControl>
                 <FormMessage />
@@ -128,7 +140,11 @@ const BookForm = ({ form, onSubmit, isLoading, buttonLabel }: PropsType) => {
             <FormItem>
               <FormLabel>ISBN</FormLabel>
               <FormControl>
-                <Input {...field} value={field.value || ""} />
+                <Input
+                  {...field}
+                  value={field.value || ""}
+                  placeholder="e.g., 987-5879475818"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -141,7 +157,11 @@ const BookForm = ({ form, onSubmit, isLoading, buttonLabel }: PropsType) => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} value={field.value || ""} />
+                <Textarea
+                  {...field}
+                  value={field.value || ""}
+                  placeholder="Add Description"
+                />
               </FormControl>
             </FormItem>
           )}

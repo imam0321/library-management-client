@@ -8,8 +8,8 @@ import {
 import { toast } from "sonner";
 import type { IBook } from "@/utils/book.interface";
 import BookForm from "@/components/BookForm/BookForm";
-import { useNavigate, useParams } from "react-router";
-import { useEffect } from "react";
+import { useLocation, useNavigate, useParams } from "react-router";
+import { useEffect, useRef } from "react";
 
 const AddBookPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -21,14 +21,43 @@ const AddBookPage = () => {
   const [updateBook, { isLoading: isUpdating }] = useUpdateBookMutation();
   const [addBook, { isLoading: isAdding }] = useAddBookMutation();
 
-  const form = useForm<IBook>();
+  const form = useForm<IBook>({
+    defaultValues: {
+      title: "",
+      author: "",
+      genre: "FICTION",
+      isbn: "",
+      description: "",
+      copies: 0,
+    },
+  });
   const navigate = useNavigate();
+  const location = useLocation();
+  const prevPath = useRef(location.pathname);
 
   useEffect(() => {
     if (data?.data) {
       form.reset(data?.data);
     }
   }, [data, form]);
+
+  useEffect(() => {
+    const fromEdit = prevPath.current.startsWith("/edit-book");
+    const toAdd = location.pathname === "/create-book";
+
+    if (fromEdit && toAdd) {
+      form.reset({
+        title: "",
+        author: "",
+        genre: "FICTION",
+        isbn: "",
+        description: "",
+        copies: 0,
+      });
+    }
+
+    prevPath.current = location.pathname;
+  }, [location.pathname, form]);
 
   const onSubmit: SubmitHandler<IBook> = async (formData) => {
     try {
@@ -54,16 +83,18 @@ const AddBookPage = () => {
 
   return (
     <div className="max-w-lg mx-auto px-4 py-10">
-      <Card>
+      <Card className="border-2 border-gray-300 dark:border-gray-900">
         <CardHeader>
-          <CardTitle>Add New Book</CardTitle>
+          <CardTitle className="text-xl">
+            {isEdit ? "Update Book" : "Add New Book"}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <BookForm
             form={form}
             onSubmit={onSubmit}
             isLoading={loading}
-            buttonLabel="Update Book"
+            buttonLabel={isEdit ? "Update Book" : "Add Book"}
           />
         </CardContent>
       </Card>
